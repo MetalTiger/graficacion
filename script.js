@@ -17,8 +17,20 @@ function main()  // Función principal
     // Evento que detecta cuando se suelta el clic izquierdo
     canvas.addEventListener("mouseup", function (e)
     {
-      dragging = false;
-      //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
+        dragging = false;
+      
+        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                
+            //drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); // Se dibuja la linea
+            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1);
+
+        }else{
+
+            //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
+            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); 
+
+        } */
+
     });
 
     canvas.addEventListener("mousemove", function (e)
@@ -28,7 +40,16 @@ function main()  // Función principal
             context.clearRect(0, 0, canvas.width, canvas.height); // Se limpia el canvas
             //drawGrid(context, "lightgray", 10, 0.5);
 
-            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
+
+            if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                
+                drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); // Se dibuja la linea
+
+            }else{
+
+                drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
+
+            }
 
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
@@ -68,26 +89,68 @@ function drawLine(context, x0, y0, x1, y1, r, g, b, a)
     if (dy > dx) {
         
         // Se calculan las X
-        for (y = y0; y <= y1; y++)
-        {
-            x = Math.round((y-B) / M);
-            setPixel(context, x, y, r, g, b, a);
+        // Se debe saber si y0 es mayor a y1, porque si esto pasa nunca entrara al ciclo for
+        if (y0 <= y1) {
+
+            for (y = y0; y <= y1; y++)
+            {
+                x = Math.round((y-B) / M);
+                
+                setPixel(context, x, y, r, g, b, a);
+            }
+
+
+        }else{
+
+            var auxY = y0;
+            // En caso de que pase sus valores se intercambian
+            y0 = y1;
+            y1 = auxY;
+
+            for (y = y0; y <= y1; y++)
+            {
+                x = Math.round((y-B) / M);
+                
+                setPixel(context, x, y, r, g, b, a);
+            }
 
         }
-        
+
     } else {
 
         // Se calculan las Y
-        for (x = x0; x <= x1; x++)
-        {
-            //y = y0 + dy * (x - x0) / dx;
-            y = Math.round((M * x) + B);
-            setPixel(context, x, y, r, g, b, a);
+        // Se debe saber si x0 es mayor a x1, porque si esto pasa nunca entrara al ciclo for
+        if (x0 <= x1) {         
+            
+            for (x = x0; x <= x1; x++)
+            {
+                //y = y0 + dy * (x - x0) / dx;
+                
+                y = Math.round((M * x) + B);
+                console.log(y);
+                setPixel(context, x, y, r, g, b, a);
+            }
+
+        }else{
+
+            var auxX = x0;
+            // En caso de que pase sus valores se intercambian
+            x0 = x1;
+            x1 = auxX;
+
+            for (x = x0; x <= x1; x++)
+            {
+                //y = y0 + dy * (x - x0) / dx;
+                
+                y = Math.round((M * x) + B);
+                console.log(y);
+                setPixel(context, x, y, r, g, b, a);
+            }
+
         }
 
     }
 
-    
 }
 
 // Función que convierte de flotante a entero
