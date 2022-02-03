@@ -17,19 +17,9 @@ function main()  // Función principal
     // Evento que detecta cuando se suelta el clic izquierdo
     canvas.addEventListener("mouseup", function (e)
     {
+
         dragging = false;
       
-        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
-                
-            //drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); // Se dibuja la linea
-            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1);
-
-        }else{
-
-            //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
-            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); 
-
-        } */
 
     });
 
@@ -43,11 +33,11 @@ function main()  // Función principal
 
             if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
                 
-                drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); // Se dibuja la linea
+                drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
 
             }else{
 
-                drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
+                drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
 
             }
 
@@ -78,7 +68,7 @@ function windowToCanvasCoord(canvas, x, y)
     }; // Se regresa un objeto que contiene la posoción x y y del mouse en el canvas
 }
 
-function drawLine(context, x0, y0, x1, y1, r, g, b, a)
+function drawLine(context, x0, y0, x1, y1, hex)
 {
     var dx = Math.abs(x0 - x1);
     var dy = Math.abs(y0 - y1);
@@ -90,65 +80,50 @@ function drawLine(context, x0, y0, x1, y1, r, g, b, a)
         
         // Se calculan las X
         // Se debe saber si y0 es mayor a y1, porque si esto pasa nunca entrara al ciclo for
-        if (y0 <= y1) {
-
-            for (y = y0; y <= y1; y++)
-            {
-                x = Math.round((y-B) / M);
-                
-                setPixel(context, x, y, r, g, b, a);
-            }
-
-
-        }else{
+        if (!(y0 <= y1)) {
 
             var auxY = y0;
             // En caso de que pase sus valores se intercambian
             y0 = y1;
             y1 = auxY;
 
-            for (y = y0; y <= y1; y++)
-            {
-                x = Math.round((y-B) / M);
-                
-                setPixel(context, x, y, r, g, b, a);
-            }
 
         }
+    
+        for (y = y0; y <= y1; y++)
+        {
+            x = Math.round((y-B) / M);
+            
+            setPixel(context, x, y, hex);
+        }
+
+        
 
     } else {
 
         // Se calculan las Y
         // Se debe saber si x0 es mayor a x1, porque si esto pasa nunca entrara al ciclo for
-        if (x0 <= x1) {         
+        if (!(x0 <= x1)) { 
             
-            for (x = x0; x <= x1; x++)
-            {
-                //y = y0 + dy * (x - x0) / dx;
-                
-                y = Math.round((M * x) + B);
-                
-                setPixel(context, x, y, r, g, b, a);
-            }
-
-        }else{
-
             var auxX = x0;
             // En caso de que pase sus valores se intercambian
             x0 = x1;
             x1 = auxX;
-
-            for (x = x0; x <= x1; x++)
-            {
-                //y = y0 + dy * (x - x0) / dx;
-                
-                y = Math.round((M * x) + B);
-                
-                setPixel(context, x, y, r, g, b, a);
-            }
+            
+            
 
         }
 
+        for (x = x0; x <= x1; x++)
+        {
+            //y = y0 + dy * (x - x0) / dx;
+            
+            y = Math.round((M * x) + B);
+            
+            setPixel(context, x, y, hex);
+        }
+
+        
     }
 
 }
@@ -160,11 +135,11 @@ function float2int (value)
 }
 
 // Función para definir un pixel
-function setPixel(context, x,y, r, g, b, a)
+function setPixel(context, x,y, hex)
 {
     
     //context.fillStyle = "rgba("+r+","+g+","+b+","+a+")"; // Se define el relleno RGBA
-    context.fillStyle = "#197BBD"; // Se define el relleno HEX
+    context.fillStyle = hex; // Se define el relleno HEX
     context.fillRect( x, y, 2, 2 ); // Se dibuja un cuadrado
 }
 
