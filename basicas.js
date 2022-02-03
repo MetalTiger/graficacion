@@ -127,7 +127,7 @@ function drawLine(context, x0, y0, x1, y1, r, g, b, a)
                 //y = y0 + dy * (x - x0) / dx;
                 
                 y = Math.round((M * x) + B);
-                console.log(y);
+                
                 setPixel(context, x, y, r, g, b, a);
             }
 
@@ -143,7 +143,7 @@ function drawLine(context, x0, y0, x1, y1, r, g, b, a)
                 //y = y0 + dy * (x - x0) / dx;
                 
                 y = Math.round((M * x) + B);
-                console.log(y);
+                
                 setPixel(context, x, y, r, g, b, a);
             }
 
