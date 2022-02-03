@@ -18,18 +18,6 @@ function main()  // Función principal
     canvas.addEventListener("mouseup", function (e)
     {
         dragging = false;
-      
-        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
-                
-            //drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); // Se dibuja la linea
-            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1);
-
-        }else{
-
-            //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, 128, 64, 128, 1); // Se dibuja la linea
-            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, 128, 64, 128, 1); 
-
-        } */
 
     });
 
@@ -39,7 +27,6 @@ function main()  // Función principal
         {
             context.clearRect(0, 0, canvas.width, canvas.height); // Se limpia el canvas
             
-
             if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
                 
                 drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
@@ -50,6 +37,7 @@ function main()  // Función principal
 
             }
 
+            
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
             //draw coordinates position into canvas
@@ -82,72 +70,63 @@ function drawLine(context, x0, y0, x1, y1, hex)
     var dx = Math.abs(x0 - x1);
     var dy = Math.abs(y0 - y1);
 
-    var M = (y1 - y0) / (x1 - x0);
-    var B = y0 - M * x0;
+    var M;
 
     if (dy > dx) {
+
+        M = dx / dy;
         
         // Se calculan las X
         // Se debe saber si y0 es mayor a y1, porque si esto pasa nunca entrara al ciclo for
-        if (y0 <= y1) {
-
-            for (y = y0; y <= y1; y++)
-            {
-                x = Math.round((y-B) / M);
-                
-                setPixel(context, x, y, hex);
-            }
-
-
-        }else{
+        if (!(y0 <= y1)) {
 
             var auxY = y0;
             // En caso de que pase sus valores se intercambian
             y0 = y1;
             y1 = auxY;
 
-            for (y = y0; y <= y1; y++)
-            {
-                x = Math.round((y-B) / M);
-                
-                setPixel(context, x, y, hex);
-            }
+        }
+
+        var x = x0;
+    
+        for (y = y0; y <= y1; y++)
+        {
+            
+            setPixel(context, Math.round(x), y, hex);
+
+            x += M;
 
         }
 
+        
+
     } else {
+
+        M = dy / dx;
 
         // Se calculan las Y
         // Se debe saber si x0 es mayor a x1, porque si esto pasa nunca entrara al ciclo for
-        if (x0 <= x1) {         
+        if (!(x0 <= x1)) { 
             
-            for (x = x0; x <= x1; x++)
-            {
-                //y = y0 + dy * (x - x0) / dx;
-                
-                y = Math.round((M * x) + B);
-                console.log(y);
-                setPixel(context, x, y, hex);
-            }
-
-        }else{
-
             var auxX = x0;
             // En caso de que pase sus valores se intercambian
             x0 = x1;
             x1 = auxX;
+            
+        }
 
-            for (x = x0; x <= x1; x++)
-            {
-                //y = y0 + dy * (x - x0) / dx;
+        var y = y0;
+
+        for (x = x0; x <= x1; x++)
+        {
                 
-                y = Math.round((M * x) + B);
-                console.log(y);
-                setPixel(context, x, y, hex);
-            }
+            setPixel(context, x, Math.round(y), hex);
+
+            y += M;
 
         }
 
+        
     }
 
 }
