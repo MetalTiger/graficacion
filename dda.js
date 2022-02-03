@@ -19,6 +19,17 @@ function main()  // Función principal
     {
         dragging = false;
 
+        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                
+            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
+
+        }else{
+
+            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
+
+        } */
+
+        
     });
 
     canvas.addEventListener("mousemove", function (e)
@@ -27,16 +38,7 @@ function main()  // Función principal
         {
             context.clearRect(0, 0, canvas.width, canvas.height); // Se limpia el canvas
             
-            if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
-                
-                drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
-
-            }else{
-
-                drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-
-            }
-
+            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
             
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
@@ -67,31 +69,47 @@ function windowToCanvasCoord(canvas, x, y)
 
 function drawLine(context, x0, y0, x1, y1, hex)
 {
-    var dx = Math.abs(x0 - x1);
-    var dy = Math.abs(y0 - y1);
+
+
+    var dx = Math.abs(x1 - x0);
+    var dy = Math.abs(y1 - y0);
 
     var M;
 
+
+    // Cambiar puntos aqui, no antes 
+
+
     if (dy > dx) {
 
-        M = dx / dy;
+        M = (x1 - x0) / (y1 - y0);
         
         // Se calculan las X
         // Se debe saber si y0 es mayor a y1, porque si esto pasa nunca entrara al ciclo for
         if (!(y0 <= y1)) {
 
+            var auxX = x0;
             var auxY = y0;
             // En caso de que pase sus valores se intercambian
             y0 = y1;
             y1 = auxY;
 
+            x0 = x1;
+            x1 = auxX;
+
+
         }
 
+        console.log("El valor de x0 es:" + x0);
+        console.log("El valor de y0 es:" + y0);
+        console.log("El valor de x1 es:" + x1);
+        console.log("El valor de y1 es:" + y1);
+
         var x = x0;
-    
+
         for (y = y0; y <= y1; y++)
         {
-            
+
             setPixel(context, Math.round(x), y, hex);
 
             x += M;
@@ -102,16 +120,20 @@ function drawLine(context, x0, y0, x1, y1, hex)
 
     } else {
 
-        M = dy / dx;
+        M = (y1 - y0) / (x1 - x0);
 
         // Se calculan las Y
         // Se debe saber si x0 es mayor a x1, porque si esto pasa nunca entrara al ciclo for
         if (!(x0 <= x1)) { 
             
+            var auxY = y0;
             var auxX = x0;
             // En caso de que pase sus valores se intercambian
             x0 = x1;
             x1 = auxX;
+
+            y0 = y1;
+            y1 = auxY;
             
         }
 
@@ -119,7 +141,7 @@ function drawLine(context, x0, y0, x1, y1, hex)
 
         for (x = x0; x <= x1; x++)
         {
-                
+            
             setPixel(context, x, Math.round(y), hex);
 
             y += M;
