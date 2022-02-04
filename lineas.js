@@ -49,23 +49,9 @@ function main()  // Función principal
     {
         if (dragging)
         {
-            //context.clearRect(0, 0, canvas.width, canvas.height); // Se limpia el canvas
-            //drawGrid(context, "lightgray", 10, 0.5);
-
 
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
-            //draw coordinates position into canvas
-            /* context.font = "10pt Arial";
-            context.fillStyle = "rgba(50,50,50,1.0)";
-
-            var pos = windowToCanvasCoord(canvas, float2int(e.clientX), float2int(e.clientY));
-            
-            var xint = float2int(pos.x);
-            var yint = float2int(pos.y);
-            
-            var str = "(" + xint + "," + yint + ")";
-            context.fillText(str, 10, 10); */
         }
     });
 
