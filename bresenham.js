@@ -28,8 +28,10 @@ function main()  // Función principal
             drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
 
         } */
+        
         //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-        //drawLine(context, 10, 24, 23, 6, "#197BBD"); // Se dibuja la linea
+        //drawLine(context, 30, 34, 34, 10, "#197BBD"); // Se dibuja la linea
+        //drawLine(context, 30, 34, 34, 10, "#197BBD"); // Se dibuja la linea
 
         
     });
@@ -74,7 +76,7 @@ function windowToCanvasCoord(canvas, x, y)
 function drawLine(context, x0, y0, x1, y1, hex)
 {
 
-    if ( x0 > x1 || y0 > y1) {
+    if ( x0 > x1 || y0 > y1 ) {
 
         var auxX = x0;
         var auxY = y0;
@@ -97,7 +99,6 @@ function drawLine(context, x0, y0, x1, y1, hex)
 
     var Pk = (2 * dy) - dx;
 
-    console.log("1.- Pk0 = (2*" + dy + ") - " + dx );
 
     console.log("2.- Pk0 = " + (2*dy) + " - " + dx );
 
@@ -112,78 +113,66 @@ function drawLine(context, x0, y0, x1, y1, hex)
     var x = x0;
     var y = y0;
 
-    if (diffDoble > 0) {
-        
-        for (i = 0; i < Math.abs(dx)-1; i++) {
-        
-            if (Pk < 0) {
     
-                x++;
+    for (i = 0; i <= Math.abs(dx)-1; i++) {
     
-                setPixel(context, x, y, hex);
-    
-                Pk = Pk + 2*dy;
-    
-    
+        if (Pk < 0) {
+
+            if (x0 > x1) {
+                
+                x--;
+
             }else{
-        
+
                 x++;
-                y++;
-    
-                setPixel(context, x, y, hex);
-    
-               
-                
-                Pk = Pk + diffDoble;
-    
-                
-    
-                
-        
+
             }
-    
-            console.log("Pk = " + Pk);
-    
+
             
-        }
+
+            setPixel(context, x, y, hex);
+
+            Pk = Pk + 2*dy;
 
 
-    }else{
+        }else{
 
-        for (i = 0; i < Math.abs(dx)-1; i++) {
-        
-            if (Pk < 0) {
-    
-                x++;
-    
-                setPixel(context, x, y, hex);
-    
-                Pk = Pk + 2*dy;
-    
-    
+            if (x0 > x1) {
+                
+                x--;
+
             }else{
-        
+
                 x++;
+
+            }
+
+            if (y0 > y1) {
+             
                 y--;
-    
-                setPixel(context, x, y, hex);
-    
-               
-                
-                Pk = Pk - diffDoble;
-    
-                
-    
-                
-        
+
+            }else{
+
+                y++;
+
             }
     
-            console.log("Pk = " + Pk);
-    
             
+            setPixel(context, x, y, hex);
+
+            
+            
+            Pk = Pk + diffDoble;
+
+            
+
+            
+    
         }
 
+        console.log("Pk = " + Pk);
 
+        
     }
 
     
