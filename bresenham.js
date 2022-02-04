@@ -1,4 +1,4 @@
-function main()  // Función principal
+/* function main()  // Función principal
 {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
@@ -18,19 +18,8 @@ function main()  // Función principal
     canvas.addEventListener("mouseup", function (e)
     {
         dragging = false;
-
-        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
-                
-            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
-
-        }else{
-
-            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-
-        } */
         
         //drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-        //drawLine(context, 30, 34, 34, 10, "#197BBD"); // Se dibuja la linea
         //drawLine(context, 30, 34, 34, 10, "#197BBD"); // Se dibuja la linea
 
         
@@ -40,11 +29,11 @@ function main()  // Función principal
     {
         if (dragging)
         {
+
             context.clearRect(0, 0, canvas.width, canvas.height); // Se limpia el canvas
             
            
             drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-
             
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
@@ -62,21 +51,21 @@ function main()  // Función principal
         }
     });
 
-}
+} */
 
 // Método para calcular la posición del mouse respecto al canvas y no a la ventana
-function windowToCanvasCoord(canvas, x, y)
+/* function windowToCanvasCoord(canvas, x, y)
 {
     var bbox = canvas.getBoundingClientRect(); // Se obtiene el tamaño absoluto del canvas en la pagina
     return { x: x - bbox.left * (canvas.width / bbox.width),   
              y: y - bbox.top * (canvas.height / bbox.height)
     }; // Se regresa un objeto que contiene la posoción x y y del mouse en el canvas
 }
-
-function drawLine(context, x0, y0, x1, y1, hex)
+ */
+function drawBresenhamLine(context, x0, y0, x1, y1, hex)
 {
 
-    if ( x0 > x1 || y0 > y1 ) {
+    /* if ( x0 > x1 || y0 > y1 ) {
 
         var auxX = x0;
         var auxY = y0;
@@ -88,14 +77,52 @@ function drawLine(context, x0, y0, x1, y1, hex)
         x1 = auxX;
 
 
-    }
+    } */
+
+    x0 = float2int(x0);
+    y0 = float2int(y0);
+    x1 = float2int(x1);
+    y1 = float2int(y1);
 
     var dx = Math.abs(x1 - x0);
-    console.log("dx = " + dx);
+    //console.log("dx = " + dx);
     var dy = Math.abs(y1 - y0);
-    console.log("dy = " + dy);
+    //console.log("dy = " + dy);
 
-    setPixel(context, x0, y0, hex);
+
+    // Se saca la diferencia de las x y y
+    var sx = (x0 < x1) ? 1 : -1;
+    var sy = (y0 < y1) ? 1 : -1;
+
+    // dx -dy
+    var err = dx - dy;
+
+    // Mientras los puntos no sean iguales
+    while(x0 != x1 || y0 != y1) {
+
+        setPixel(context, x0, y0, hex);
+
+        // 2(dx - dy)
+        var e2 = 2 * err;
+
+        // Dependiendo del valor de e2 se aumentan/reducen las x o y
+        if (e2 > -dy){ 
+        
+            err -= dy; 
+            x0 += sx;
+        
+        }
+        
+        if (e2 < dx){
+            
+            err += dx; 
+            y0 += sy; 
+        
+        }
+
+    }
+
+    /* setPixel(context, x0, y0, hex);
 
     var Pk = (2 * dy) - dx;
 
@@ -127,8 +154,6 @@ function drawLine(context, x0, y0, x1, y1, hex)
                 x++;
 
             }
-
-            
 
             setPixel(context, x, y, hex);
 
@@ -163,17 +188,14 @@ function drawLine(context, x0, y0, x1, y1, hex)
             
             
             Pk = Pk + diffDoble;
-
-            
-
-            
+ 
     
         }
 
         console.log("Pk = " + Pk);
 
         
-    }
+    } */
 
     
 

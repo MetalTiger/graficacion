@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linea</title>
 </head>
-<body onload="main();">
+<body onload="main()">
+
+    <input type="radio" name="Tipo" id="Basica" checked><label for="Basica">Linea Basica</label>
+    <input type="radio" name="Tipo" id="DDA" ><label for="DDA">Linea DDA</label>
+    <input type="radio" name="Tipo" id="Bresenham" ><label for="Bresenham">Linea Bresenham</label><br>
 
     <canvas id="canvas" width="500" height="500" style="border: 1px solid black;"></canvas>
     <br>
-    
+
+    <script src="lineas.js"></script>
+    <script src="basicas.js"></script>
+    <script src="dda.js"></script>
     <script src="bresenham.js"></script>
+
 
 </body>
 </html>

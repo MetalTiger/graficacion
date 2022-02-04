@@ -1,4 +1,4 @@
-function main()  // Función principal
+/* function main()  // Función principal
 {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
@@ -18,16 +18,6 @@ function main()  // Función principal
     canvas.addEventListener("mouseup", function (e)
     {
         dragging = false;
-
-        /* if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
-                
-            drawLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
-
-        }else{
-
-            drawLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-
-        } */
 
         
     });
@@ -56,18 +46,18 @@ function main()  // Función principal
         }
     });
 
-}
+} */
 
 // Método para calcular la posición del mouse respecto al canvas y no a la ventana
-function windowToCanvasCoord(canvas, x, y)
+/* function windowToCanvasCoord(canvas, x, y)
 {
     var bbox = canvas.getBoundingClientRect(); // Se obtiene el tamaño absoluto del canvas en la pagina
     return { x: x - bbox.left * (canvas.width / bbox.width),   
              y: y - bbox.top * (canvas.height / bbox.height)
     }; // Se regresa un objeto que contiene la posoción x y y del mouse en el canvas
-}
+} */
 
-function drawLine(context, x0, y0, x1, y1, hex)
+function drawDDALine(context, x0, y0, x1, y1, hex)
 {
 
 
@@ -154,10 +144,10 @@ function drawLine(context, x0, y0, x1, y1, hex)
 }
 
 // Función que convierte de flotante a entero
-function float2int (value)
+/* function float2int (value)
 {
     return value | 0;
-}
+} */
 
 // Función para definir un pixel
 function setPixel(context, x,y, hex)

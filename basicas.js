@@ -1,4 +1,4 @@
-function main()  // Función principal
+/* function main()  // Función principal
 {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
@@ -67,8 +67,8 @@ function windowToCanvasCoord(canvas, x, y)
              y: y - bbox.top * (canvas.height / bbox.height)
     }; // Se regresa un objeto que contiene la posoción x y y del mouse en el canvas
 }
-
-function drawLine(context, x0, y0, x1, y1, hex)
+ */
+function drawBasicLine(context, x0, y0, x1, y1, hex)
 {
     var dx = Math.abs(x0 - x1);
     var dy = Math.abs(y0 - y1);
@@ -144,12 +144,12 @@ function drawLine(context, x0, y0, x1, y1, hex)
 
 }
 
-// Función que convierte de flotante a entero
+/* // Función que convierte de flotante a entero
 function float2int (value)
 {
     return value | 0;
 }
-
+ */
 // Función para definir un pixel
 function setPixel(context, x,y, hex)
 {
@@ -159,7 +159,7 @@ function setPixel(context, x,y, hex)
     context.fillRect( x, y, 2, 2 ); // Se dibuja un cuadrado
 }
 
-// Función para dibujar un grid
+/* // Función para dibujar un grid
 function drawGrid(context, color, size, tickness)
 {
     context.save();
@@ -177,4 +177,4 @@ function drawGrid(context, color, size, tickness)
         context.stroke();
     }
     context.restore();
-}
+} */
