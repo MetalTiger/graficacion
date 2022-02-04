@@ -89,13 +89,29 @@ function drawLine(context, x0, y0, x1, y1, hex)
 
 
         }
-    
-        for (y = y0; y <= y1; y++)
-        {
-            x = Math.round((y-B) / M);
+
+        if (x0 === x1) {
             
-            setPixel(context, x, y, hex);
+            for (y = y0; y <= y1; y++)
+            {
+                x = x0;
+                
+                setPixel(context, x, y, hex);
+            }
+
+
+        }else{
+
+            for (y = y0; y <= y1; y++)
+            {
+                x = Math.round((y-B) / M);
+                
+                setPixel(context, x, y, hex);
+            }
+
         }
+    
+        
 
         
 
