@@ -43,6 +43,7 @@ function main()  // Función principal
         }else if (document.getElementById('Circulo').checked){
 
               
+            drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y);
 
 
 
