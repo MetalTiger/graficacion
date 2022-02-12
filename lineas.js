@@ -36,9 +36,19 @@ function main()  // Función principal
 
             drawDDALine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#00FF00");
 
-        } else {
+        } else if (document.getElementById('Bresenham').checked) {
             
             drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
+
+        }else if (document.getElementById('Circulo').checked){
+
+              
+
+
+
+        }else if (document.getElementById('Poligono').checked){
+
+            drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 6);
 
         }
     
