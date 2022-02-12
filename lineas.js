@@ -20,7 +20,7 @@ function main()  // Función principal
 
         dragging = false;
 
-        if (document.getElementById('Basica').checked) {
+        /* if (document.getElementById('Basica').checked) {
             
             if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
                 
@@ -51,7 +51,7 @@ function main()  // Función principal
 
             drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 6);
 
-        }
+        } */
     
 
     });
@@ -60,6 +60,41 @@ function main()  // Función principal
     {
         if (dragging)
         {
+
+            context.clearRect(0, 0, 1000, 1000);
+
+            if (document.getElementById('Basica').checked) {
+            
+                if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                    
+                    drawBasicLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
+                    
+                }else{
+    
+                    drawBasicLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
+    
+                }
+                
+            } else if(document.getElementById('DDA').checked){
+    
+                drawDDALine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#00FF00");
+    
+            } else if (document.getElementById('Bresenham').checked) {
+                
+                drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
+    
+            }else if (document.getElementById('Circulo').checked){
+    
+                  
+                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y);
+    
+    
+    
+            }else if (document.getElementById('Poligono').checked){
+    
+                drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
+    
+            }
 
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
