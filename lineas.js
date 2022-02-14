@@ -20,7 +20,7 @@ function main()  // Función principal
 
         dragging = false;
 
-        /* if (document.getElementById('Basica').checked) {
+        if (document.getElementById('Basica').checked) {
             
             if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
                 
@@ -40,18 +40,32 @@ function main()  // Función principal
             
             drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
 
-        }else if (document.getElementById('Circulo').checked){
+        }else if (document.getElementById('CirculoBasic').checked){
 
-              
-            drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y);
+            console.time("Basica");
+            drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
+            console.timeEnd("Basica");
 
+
+        }else if (document.getElementById('CirculoDDA').checked){
+
+            console.time("DDA");
+            drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
+            console.timeEnd("DDA");
+
+
+        }else if (document.getElementById('CirculoBresenham').checked){
+
+            console.time("Bresenham");
+            drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
+            console.timeEnd("Bresenham");
 
 
         }else if (document.getElementById('Poligono').checked){
 
-            drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 6);
+            drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 4);
 
-        } */
+        }
     
 
     });
@@ -61,7 +75,7 @@ function main()  // Función principal
         if (dragging)
         {
 
-            context.clearRect(0, 0, 1000, 1000);
+            /* context.clearRect(0, 0, 1000, 1000);
 
             if (document.getElementById('Basica').checked) {
             
@@ -83,10 +97,24 @@ function main()  // Función principal
                 
                 drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
     
-            }else if (document.getElementById('Circulo').checked){
+            }else if (document.getElementById('CirculoBasic').checked){
+    
+                console.time("Basica");
+                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
+                console.timeEnd("Basica");
+    
+    
+            }else if (document.getElementById('CirculoDDA').checked){
     
                   
-                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y);
+                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
+    
+    
+    
+            }else if (document.getElementById('CirculoBresenham').checked){
+    
+                  
+                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
     
     
     
@@ -94,7 +122,7 @@ function main()  // Función principal
     
                 drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
     
-            }
+            } */
 
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
