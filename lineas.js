@@ -4,6 +4,17 @@ function main()  // Función principal
     var context = canvas.getContext('2d');
     var dragging = false; // Hace referencia a si se esta presionando el clic izquierdo
     var pStart, pEnd;   // Punto inicial y punto final
+    var preview = false;
+
+    var inputLados = document.getElementById('Lados');
+
+    var lados = document.getElementById('Lados').value;
+
+    inputLados.addEventListener("change", ()=>{
+
+        lados = document.getElementById('Lados').value;
+
+    });
 
     // Evento que detecta el clic izquierdo
     canvas.addEventListener("mousedown", function (e)
@@ -46,13 +57,11 @@ function main()  // Función principal
             drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
             console.timeEnd("Basica");
 
-
         }else if (document.getElementById('CirculoDDA').checked){
 
             console.time("DDA");
             drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
             console.timeEnd("DDA");
-
 
         }else if (document.getElementById('CirculoBresenham').checked){
 
@@ -60,10 +69,9 @@ function main()  // Función principal
             drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
             console.timeEnd("Bresenham");
 
-
         }else if (document.getElementById('Poligono').checked){
 
-            drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 4);
+            drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, lados);
 
         }
     
@@ -75,54 +83,50 @@ function main()  // Función principal
         if (dragging)
         {
 
-            /* context.clearRect(0, 0, 1000, 1000);
+            if (preview) {
 
-            if (document.getElementById('Basica').checked) {
+                context.clearRect(0, 0, 1000, 1000);
+
+                if (document.getElementById('Basica').checked) {
             
-                if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                    if (pStart.x > pEnd.x || pStart.y > pEnd.y) {
+                        
+                        drawBasicLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
+                        
+                    }else{
+        
+                        drawBasicLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
+        
+                    }
                     
-                    drawBasicLine(context, pEnd.x, pEnd.y, pStart.x, pStart.y, "#197BBD"); // Se dibuja la linea
+                } else if(document.getElementById('DDA').checked){
+        
+                    drawDDALine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#00FF00");
+        
+                } else if (document.getElementById('Bresenham').checked) {
                     
-                }else{
-    
-                    drawBasicLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#197BBD"); // Se dibuja la linea
-    
+                    drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
+        
+                }else if (document.getElementById('CirculoBasic').checked){
+        
+                    console.time("Basica");
+                    drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
+                    console.timeEnd("Basica");
+        
+                }else if (document.getElementById('CirculoDDA').checked){
+                      
+                    drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
+        
+                }else if (document.getElementById('CirculoBresenham').checked){
+        
+                    drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
+        
+                }else if (document.getElementById('Poligono').checked){
+        
+                    drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, lados);
+        
                 }
-                
-            } else if(document.getElementById('DDA').checked){
-    
-                drawDDALine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#00FF00");
-    
-            } else if (document.getElementById('Bresenham').checked) {
-                
-                drawBresenhamLine(context, pStart.x, pStart.y, pEnd.x, pEnd.y, "#FF0000");
-    
-            }else if (document.getElementById('CirculoBasic').checked){
-    
-                console.time("Basica");
-                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
-                console.timeEnd("Basica");
-    
-    
-            }else if (document.getElementById('CirculoDDA').checked){
-    
-                  
-                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
-    
-    
-    
-            }else if (document.getElementById('CirculoBresenham').checked){
-    
-                  
-                drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
-    
-    
-    
-            }else if (document.getElementById('Poligono').checked){
-    
-                drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
-    
-            } */
+            }
 
             pEnd = windowToCanvasCoord(canvas, e.clientX, e.clientY);
 
