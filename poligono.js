@@ -20,4 +20,9 @@ function drawPoligon(context, x0, y0, x1, y1, lados) {
 
   }
 
+  x = radio * Math.cos(Math.PI / 180 * 0) + x0;
+  y = radio * Math.sin(Math.PI / 180 * 0) + y0;
+
+  drawBresenhamLine(context, xAnterior, yAnterior, x, y, "#197BBD");
+
 }
