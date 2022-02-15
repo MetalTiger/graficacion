@@ -69,6 +69,24 @@ function main()  // Función principal
             drawCircle(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
             console.timeEnd("Bresenham");
 
+        }else if (document.getElementById('ElipseBasic').checked){
+
+            console.time("Basica");
+            drawEllipse(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 1);
+            console.timeEnd("Basica");
+
+        }else if (document.getElementById('ElipseDDA').checked){
+
+            console.time("DDA");
+            drawEllipse(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 2);
+            console.timeEnd("DDA");
+
+        }else if (document.getElementById('ElipseBresenham').checked){
+
+            console.time("Bresenham");
+            drawEllipse(context, pStart.x, pStart.y, pEnd.x,pEnd.y, 3);
+            console.timeEnd("Bresenham");
+
         }else if (document.getElementById('Poligono').checked){
 
             drawPoligon(context, pStart.x, pStart.y, pEnd.x,pEnd.y, lados);

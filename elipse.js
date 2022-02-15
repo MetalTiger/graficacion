@@ -1,4 +1,4 @@
-function drawCircle(context, x0, y0, x1, y1, type) {
+function drawEllipse(context, x0, y0, x1, y1, type) {
   
     var radio = x1 - x0; 
 
